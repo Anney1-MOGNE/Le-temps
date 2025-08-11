@@ -15,7 +15,7 @@ function refreshWeather(response) {
     windSpeedElement.innerHTML = `${Math.round(response.data.wind.speed)}km/h`;
     temperatureElement.innerHTML = Math.round(temperature);
     
-}
+} 
 
 function formatDate(date) {
     
