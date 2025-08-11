@@ -7,8 +7,13 @@ function refreshWeather(response) {
     let windSpeedElement = document.querySelector("#wind-speed");
     let timeElement = document.querySelector("#time");
     let date = new Date(response.data.time * 1000);
+    let iconElement = document.querySelector(".icon");
 
-    cityElement.innerHTML = response.data.city
+
+    iconElement.innerHTML = `<img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png" class="weather-app-icon" />`;
+
+    cityElement.innerHTML = response.data.city;
+    // Using Math.round to round the temperature to the nearest integer
     timeElement.innerHTML = formatDate(date);
     descriptionElement.innerHTML = response.data.condition.description;
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
