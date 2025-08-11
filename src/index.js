@@ -8,8 +8,6 @@ function refreshWeather(response) {
     let timeElement = document.querySelector("#time");
     let date = new Date(response.data.time * 1000);
 
-    console.log(response.data);
-
     cityElement.innerHTML = response.data.city
     timeElement.innerHTML = formatDate(date);
     descriptionElement.innerHTML = response.data.condition.description;
