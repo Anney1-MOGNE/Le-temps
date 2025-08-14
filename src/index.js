@@ -20,6 +20,7 @@ function refreshWeather(response) {
     windSpeedElement.innerHTML = `${Math.round(response.data.wind.speed)}km/h`;
     temperatureElement.innerHTML = Math.round(temperature);
     
+    getForecast(response.data.city);
 } 
 
 function formatDate(date) {
@@ -40,7 +41,7 @@ return `${day} ${hours}:${minutes}`; // Plsaceholder for the date format, can be
 function searchCity(city) {
     // separation of concerns: API key is stored in a variable
 let apiKey =  "b2a5adcct04b33178913oc335f405433"
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 axios.get(apiUrl).then(refreshWeather);
 }
 
@@ -52,8 +53,15 @@ let searchInput = document.querySelector("#search-form-input");
 searchCity(searchInput.value);
 }
 
-function displayForecast() {
+function getForecast(city) {
+let apiKey = "096041afb416o806a3dd39726t99bf5a"
+let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+axios.get(apiUrl).then(displayForecast);
+console.log(apiUrl);
+}
 
+function displayForecast(response) {
+console.log(response.data);
 
     let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
     let forecastHtml = "";
@@ -82,5 +90,7 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Cape Town"); // default city on page load
-displayForecast(); // display forecast on page load
+ 
+
+
 
